@@ -1,9 +1,10 @@
 
 let arr = [9, 13, 25, 16, 7, 92, 28]
-console.log(bubbleSort(arr))
-console.log(selectionSort(arr))
-console.log(insertSort(arr))
-console.log(shellSort(arr))
+// console.log(bubbleSort(arr))
+// console.log(selectionSort(arr))
+// console.log(insertSort(arr))
+// console.log(shellSort(arr))
+console.log(sort(arr))
 
 // 冒泡排序
 function bubbleSort(arr){
@@ -66,3 +67,55 @@ function shellSort(arr){
     }
     return arr
 }
+
+// 归并排序
+function sort(arr) {
+    mergeSort(arr, 0, arr.length - 1);
+    return arr;
+}
+function mergeSort(arr, left, right) {
+    if (left === right) return;
+    let mid = parseInt(left + Math.floor((right - left)/2));
+    mergeSort(arr, left, mid);
+    mergeSort(arr, mid + 1, right);
+    merge(arr, left, right, mid)
+}
+function merge(arr, left, right, mid){
+    let temp = [];
+    let i = 0;
+    let p1 = left;
+    let p2 = mid + 1;
+    while (p1 <= mid && p2 <= right) {
+        temp[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+    }
+    while (p1 <= mid) {
+        temp[i++] = arr[p1++];
+    }
+    while (p2 <= right) {
+        temp[i++] = arr[p2++];
+    }
+    for (let i = 0; i < temp.length; i++) {
+        arr[left + i] = temp[i];
+    }
+    return arr;
+}
+
+function merge1(leftArr, rightArr){  
+    var result = [];  
+    while (leftArr.length > 0 && rightArr.length > 0){  
+      if (leftArr[0] < rightArr[0])  
+        result.push(leftArr.shift());   
+      else   
+        result.push(rightArr.shift());  
+    }   
+    return result.concat(leftArr).concat(rightArr); 
+}  
+
+function mergeSort1(array){  
+    if (array.length == 1) return array;  
+    var middle = Math.floor(array.length / 2);
+    var left = array.slice(0, middle);
+    var right = array.slice(middle);  
+    return merge1(mergeSort1(left), mergeSort1(right));
+}
+
