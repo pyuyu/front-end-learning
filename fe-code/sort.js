@@ -4,7 +4,8 @@ let arr = [9, 13, 25, 16, 7, 92, 28]
 // console.log(selectionSort(arr))
 // console.log(insertSort(arr))
 // console.log(shellSort(arr))
-console.log(sort(arr))
+// console.log(mergeSort_main(arr))
+console.log(quickSort_main(arr))
 
 // 冒泡排序
 function bubbleSort(arr){
@@ -69,35 +70,36 @@ function shellSort(arr){
 }
 
 // 归并排序
-function sort(arr) {
+function mergeSort_main(arr) {
     mergeSort(arr, 0, arr.length - 1);
     return arr;
-}
-function mergeSort(arr, left, right) {
-    if (left === right) return;
-    let mid = parseInt(left + Math.floor((right - left)/2));
-    mergeSort(arr, left, mid);
-    mergeSort(arr, mid + 1, right);
-    merge(arr, left, right, mid)
-}
-function merge(arr, left, right, mid){
-    let temp = [];
-    let i = 0;
-    let p1 = left;
-    let p2 = mid + 1;
-    while (p1 <= mid && p2 <= right) {
-        temp[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+
+    function mergeSort(arr, left, right) {
+        if (left === right) return;
+        let mid = parseInt(left + Math.floor((right - left)/2));
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, right, mid)
     }
-    while (p1 <= mid) {
-        temp[i++] = arr[p1++];
+    function merge(arr, left, right, mid){
+        let temp = [];
+        let i = 0;
+        let p1 = left;
+        let p2 = mid + 1;
+        while (p1 <= mid && p2 <= right) {
+            temp[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while (p1 <= mid) {
+            temp[i++] = arr[p1++];
+        }
+        while (p2 <= right) {
+            temp[i++] = arr[p2++];
+        }
+        for (let i = 0; i < temp.length; i++) {
+            arr[left + i] = temp[i];
+        }
+        return arr;
     }
-    while (p2 <= right) {
-        temp[i++] = arr[p2++];
-    }
-    for (let i = 0; i < temp.length; i++) {
-        arr[left + i] = temp[i];
-    }
-    return arr;
 }
 
 function merge1(leftArr, rightArr){  
@@ -110,12 +112,42 @@ function merge1(leftArr, rightArr){
     }   
     return result.concat(leftArr).concat(rightArr); 
 }  
-
 function mergeSort1(array){  
     if (array.length == 1) return array;  
     var middle = Math.floor(array.length / 2);
     var left = array.slice(0, middle);
     var right = array.slice(middle);  
     return merge1(mergeSort1(left), mergeSort1(right));
+}
+
+
+// 快排
+function quickSort_main(arr){
+    quickSort(arr, 0, arr.length - 1)
+    return arr
+
+    function quickSort(arr, left, right){
+        if(left < right){
+            let position = partition(arr, left, right)
+            quickSort(arr, left, position - 1)
+            quickSort(arr, position + 1, right) 
+        }
+    }
+
+    function partition(arr, left, right){
+        let pivot  = arr[left]
+        while(left < right){
+            while(right > left && arr[right] >= pivot){
+                right--
+            }
+            arr[left] = arr[right]
+            while(left < right && arr[left] <= pivot){
+                left++
+            }
+            arr[right] = arr[left]
+        }
+        arr[left] = pivot
+        return left
+    }
 }
 
