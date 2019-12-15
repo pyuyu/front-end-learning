@@ -5,7 +5,9 @@ let arr = [9, 13, 25, 16, 7, 92, 28]
 // console.log(insertSort(arr))
 // console.log(shellSort(arr))
 // console.log(mergeSort_main(arr))
-console.log(quickSort_main(arr))
+// console.log(quickSort_main(arr))
+console.log(heapSort_main(arr))
+
 
 // 冒泡排序
 function bubbleSort(arr){
@@ -151,3 +153,46 @@ function quickSort_main(arr){
     }
 }
 
+// 堆排序
+function heapSort_main(arr){
+    let len  = arr.length
+    return heapSort(arr)
+
+    function heapSort(arr){
+        buildHeap(arr)
+        for(let i = arr.length - 1; i > 0; i--){
+            swap(arr, 0, i)
+            len--
+            heapify(arr, 0)
+        }
+        return arr
+    }
+
+    function buildHeap(arr){
+        for(let i = Math.floor(arr.length / 2); i >= 0; i--){
+            heapify(arr, i)
+        }
+    }
+
+    function heapify(arr, i){
+        let left = 2 * i + 1
+        let right = 2 * i + 2
+        let max = i
+        if(left < len && arr[left] > arr[max]){
+            max = left
+        }
+        if(right < len && arr[right] > arr[max]){
+            max = right
+        }
+        if(max != i){
+            swap(arr, i, max)
+            heapify(arr, max)
+        }
+    }
+}
+
+function swap(arr, i, j){
+    let temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+}
