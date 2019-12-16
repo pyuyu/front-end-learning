@@ -18,5 +18,5 @@ function throttle(fn, wait){
             }, wait)
         }
     }
- }
+}
 
