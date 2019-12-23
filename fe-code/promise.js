@@ -54,17 +54,15 @@ MyPromise.all = function(promises){
     let promiseNum = promises.length
     let resolvedValues = []
     for(let i = 0; i < promises.length; i++){
-      (function(i){
-        Promise.resolve(promises[i]).then(value => {
-          resolvedValues[i] = value
-          resolveCounter++
-          if (resolveCounter == promiseNum) {
-            return resolve(resolvedValues)
-          }
-        }, error => {
-          return reject(error)
-        })
-      })(i)
+      Promise.resolve(promises[i]).then(value => {
+        resolvedValues[i] = value
+        resolveCounter++
+        if (resolveCounter == promiseNum) {
+          return resolve(resolvedValues)
+        }
+      }, error => {
+        return reject(error)
+      })
     }
   })
 }
