@@ -44,3 +44,27 @@ p.then(
     console.log('error:', error)
   }
 )
+
+MyPromise.all = function(promises){
+  return new Promise(function (resolve, reject){
+    if(!Array.isArray(promises)){
+      return reject(new TypeError('arguments must be an array'));
+    }
+    let resolveCounter = 0
+    let promiseNum = promises.length
+    let resolvedValues = []
+    for(let i = 0; i < promises.length; i++){
+      (function(i){
+        Promise.resolve(promises[i]).then(value => {
+          resolvedValues[i] = value
+          resolveCounter++
+          if (resolveCounter == promiseNum) {
+            return resolve(resolvedValues)
+          }
+        }, error => {
+          return reject(error)
+        })
+      })(i)
+    }
+  })
+}

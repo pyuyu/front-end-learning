@@ -3,7 +3,7 @@ function debounce(fn, wait){
     return function (){
         let context = this
         clearTimeout(timeout)
-        timeout = setTimeout(() => fn.apply.apply(context, arguments), wait)
+        timeout = setTimeout(() => fn.apply(context, arguments), wait)
     }
 }
 
