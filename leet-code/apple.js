@@ -6,7 +6,8 @@ function putApple(m, n){
     }
     if(m === 0){
         return 1
-    } else if(n === 0){
+    }
+    if(n === 0){
         return 0
     }
     return putApple(m, n - 1) + putApple(m - n, n)
