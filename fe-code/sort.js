@@ -5,8 +5,8 @@ let arr = [9, 13, 25, 16, 7, 92, 28]
 // console.log(insertSort(arr))
 // console.log(shellSort(arr))
 // console.log(mergeSort_main(arr))
-// console.log(quickSort_main(arr))
-console.log(heapSort_main(arr))
+console.log(quickSort_main(arr))
+// console.log(heapSort_main(arr))
 
 
 // 冒泡排序
@@ -139,7 +139,7 @@ function quickSort_main(arr){
     function partition(arr, left, right){
         let pivot  = arr[left]
         while(left < right){
-            while(right > left && arr[right] >= pivot){
+            while(left < right && arr[right] >= pivot){
                 right--
             }
             arr[left] = arr[right]
