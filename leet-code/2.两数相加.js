@@ -19,7 +19,7 @@
  */
 var addTwoNumbers = function (l1, l2) {
   let temp = 0
-  let value = ''
+  let head = node = { val: 0 }
   while (l1 !== null || l2 !== null) {
     let v1 = l1 ? l1.val : 0
     let v2 = l2 ? l2.val : 0
@@ -30,20 +30,14 @@ var addTwoNumbers = function (l1, l2) {
     } else {
       temp = 0
     }
-    value += res
-    if(l1) l1 = l1.next
-    if(l2) l2 = l2.next
-  }
-  if(temp) value += temp
-  let head = node = { val: value[0] }
-  for (let i = 1; i < value.length; i++) {
-    node.next = {
-      val: +value[i]
-    }
+    node.next = { val: res, next: null }
     node = node.next
+    if (l1) l1 = l1.next
+    if (l2) l2 = l2.next
   }
-  node.next = null
-  return head
+  if (temp) node.next = { val: temp, next: null }
+
+  return head.next
 };
 // @lc code=end
 
