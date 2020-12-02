@@ -9,18 +9,18 @@
  * @param {string} s
  * @return {string}
  */
-var longestPalindrome = function(s) {
+var longestPalindrome = function (s) {
     let len = s.length
-    if(len < 2){
+    if (len < 2) {
         return s
     }
     let maxLen = 1
-    let res = s.substring(0,1)
-    for(let i = 0; i < len - 1; i++){
-        let oddStr = centerSpread(s,i,i)
-        let evenStr = centerSpread(s,i,i+1)
-        let maxLenStr = oddStr.length > evenStr.length ?  oddStr : evenStr
-        if(maxLenStr.length > maxLen){
+    let res = s.substring(0, 1)
+    for (let i = 0; i < len - 1; i++) {
+        let oddStr = centerSpread(s, i, i)
+        let evenStr = centerSpread(s, i, i + 1)
+        let maxLenStr = oddStr.length > evenStr.length ? oddStr : evenStr
+        if (maxLenStr.length > maxLen) {
             maxLen = maxLenStr.length
             res = maxLenStr
         }
@@ -28,10 +28,10 @@ var longestPalindrome = function(s) {
     return res
 };
 
-function centerSpread(s, left, right){
+function centerSpread(s, left, right) {
     let len = s.length
-    while(left >= 0 && right < len){
-        if(s[left] === s[right]){
+    while (left >= 0 && right < len) {
+        if (s[left] === s[right]) {
             left--
             right++
         } else {
