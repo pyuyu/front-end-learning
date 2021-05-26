@@ -1,16 +1,23 @@
-// 第一版
-var curry = function (fn) {
-    var args = [].slice.call(arguments, 1);
-    return function() {
-        var newArgs = args.concat([].slice.call(arguments));
-        return fn.apply(this, newArgs);
-    };
-};
+function curry(func, args) {
+  args = args || [];
+  return function () {
+    var _args = args.slice(0);
+    [].push.apply(_args, arguments)
 
-function add(a, b) {
-    return a + b;
+    if (_args.length < func.length) {
+      return curry(func, _args);
+    }
+
+    return func.apply(this, _args);
+  }
 }
 
-//或者
-var addCurry = curry(add, 1);
-addCurry(2) // 3
+
+var fn = curry(function (a, b, c) {
+  console.log([a, b, c]);
+});
+
+fn("a1", "b1", "c1")
+fn("a2", "b2")("c2")
+fn("a")("b")("c")
+fn("a")("b", "c")
