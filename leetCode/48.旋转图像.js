@@ -22,7 +22,6 @@ var rotate = function (matrix) {
       matrix[i][j] = newMatrix[i][j]
     }
   }
-  return newMatrix
 };
 // @lc code=end
 
