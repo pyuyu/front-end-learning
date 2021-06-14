@@ -10,7 +10,7 @@
  * @param {number} k
  * @return {number}
  */
-var findKthLargest = function(nums, k) {
+var findKthLargest = function (nums, k) {
 
     let len = nums.length;
     let left = 0;
@@ -20,7 +20,7 @@ var findKthLargest = function(nums, k) {
     let target = len - k;
 
     while (true) {
-        let index = partition(nums, left, right);
+        let index = partition2(nums, left, right);
         if (index == target) {
             return nums[index];
         } else if (index < target) {
@@ -31,11 +31,11 @@ var findKthLargest = function(nums, k) {
     }
 };
 
-function partition(arr, left, right){
+function partition(arr, left, right) {
     let pivot = arr[left]
     let j = left
-    for(let i = left + 1; i <= right; i++){
-        if(arr[i] < pivot){
+    for (let i = left + 1; i <= right; i++) {
+        if (arr[i] < pivot) {
             j++
             swap(arr, i, j)
         }
@@ -44,10 +44,27 @@ function partition(arr, left, right){
     return j
 }
 
-function swap(arr, index1, index2){
+function swap(arr, index1, index2) {
     let temp = arr[index1]
     arr[index1] = arr[index2]
     arr[index2] = temp
+}
+
+function partition2(arr, left, right) {
+    let pivot = arr[left]
+    while (left < right) {
+        if (left < right && arr[right] >= pivot) {
+            right--
+        }
+        arr[left] = arr[right]
+        if (left < right && arr[left] <= pivot) {
+            left++
+        }
+        arr[right] = arr[left]
+    }
+    arr[left] = pivot
+    return left
+
 }
 // @lc code=end
 
