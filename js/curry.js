@@ -12,8 +12,18 @@ function curry(func, args) {
   }
 }
 
+function curry2(fn) {
+  return function curried(...args) {
+    if (args.length >= fn.length) return fn(...args)
+    return function () {
+      return curried(...args, ...arguments)
+    }
+  }
+}
 
-var fn = curry(function (a, b, c) {
+
+
+var fn = curry2(function (a, b, c) {
   console.log([a, b, c]);
 });
 
