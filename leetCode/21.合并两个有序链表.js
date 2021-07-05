@@ -18,10 +18,6 @@
  * @return {ListNode}
  */
 
-function ListNode(val, next) {
-  this.val = (val === undefined ? 0 : val)
-  this.next = (next === undefined ? null : next)
-}
 var mergeTwoLists = function (l1, l2) {
   let head = l = new ListNode(-1)
   while (l1 && l2) {
@@ -34,16 +30,7 @@ var mergeTwoLists = function (l1, l2) {
     }
     l = l.next
   }
-  while (l1) {
-    l.next = l1
-    l1 = l1.next
-    l = l.next
-  }
-  while (l2) {
-    l.next = l2
-    l2 = l2.next
-    l = l.next
-  }
+  l.next = l1 ? l1 : l2
   return head.next
 };
 // @lc code=end
