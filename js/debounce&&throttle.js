@@ -1,29 +1,25 @@
-function debounce(fn, wait, immediate){
+function debounce(fn, wait) {
     let timer = null
-    return function(){
-        let context = this
-        if(timer){
+    return function () {
+        if (timer) {
             clearTimeout(timer)
         }
-        timmer = setTimeout(()=> {
-            fn.apply(context,arguments)
+        timmer = setTimeout(() => {
+            fn.apply(context, arguments)
         }, wait)
     }
-    
+
 }
 
 
-function throttle(fn, wait, immediate){
+function throttle(fn, wait) {
     let timer = null
-    return function(){
-        let context = this
-        if(!timer){
-            timer = setTimeout(()=> {
+    return function () {
+        if (!timer) {
+            timer = setTimeout(() => {
                 timer = null
-                fn.apply(context,arguments)
+                fn.apply(context, arguments)
             }, wait)
         }
     }
-
 }
-
