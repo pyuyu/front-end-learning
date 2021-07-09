@@ -53,11 +53,11 @@ function swap(arr, index1, index2) {
 function partition2(arr, left, right) {
     let pivot = arr[left]
     while (left < right) {
-        if (left < right && arr[right] >= pivot) {
+        while (left < right && arr[right] >= pivot) {
             right--
         }
         arr[left] = arr[right]
-        if (left < right && arr[left] <= pivot) {
+        while (left < right && arr[left] <= pivot) {
             left++
         }
         arr[right] = arr[left]
