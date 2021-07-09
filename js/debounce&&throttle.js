@@ -3,9 +3,10 @@ function debounce(fn, wait) {
     return function () {
         if (timer) {
             clearTimeout(timer)
+            timer = null
         }
         timmer = setTimeout(() => {
-            fn.apply(context, arguments)
+            fn.apply(this, arguments)
         }, wait)
     }
 
@@ -18,7 +19,7 @@ function throttle(fn, wait) {
         if (!timer) {
             timer = setTimeout(() => {
                 timer = null
-                fn.apply(context, arguments)
+                fn.apply(this, arguments)
             }, wait)
         }
     }
