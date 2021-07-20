@@ -24,6 +24,13 @@ Promise.prototype.then = function (onResolved) {
   });
 };
 
+let p = new Promise(resolve => {
+  setTimeout(() => {
+    resolve(1)
+  }, 200)
+})
+p.then(res => console.log(res))
+
 
 
 
@@ -75,24 +82,42 @@ p.then(
   }
 )
 
-MyPromise.all = function(promises){
-  return new Promise(function (resolve, reject){
-    if(!Array.isArray(promises)){
+MyPromise.all = function (promises) {
+  return new Promise(function (resolve, reject) {
+    if (!Array.isArray(promises)) {
       return reject(new TypeError('arguments must be an array'));
     }
     let resolveCounter = 0
     let promiseNum = promises.length
     let resolvedValues = []
-    for(let i = 0; i < promises.length; i++){
+    for (let i = 0; i < promises.length; i++) {
       Promise.resolve(promises[i]).then(value => {
         resolvedValues[i] = value
         resolveCounter++
         if (resolveCounter == promiseNum) {
-          return resolve(resolvedValues)
+          resolve(resolvedValues)
         }
       }, error => {
-        return reject(error)
+        reject(error)
       })
     }
   })
+}
+
+function limitLoad(urls, handler, limit) {
+  const sequence = [].concat(urls)
+  let promises = []
+
+  promises = sequence.splice(0, 3).map((url, index) => handler(url)
+    .then(() => index)
+  )
+
+  let p = Promise.race(promises)
+  for (let i = 0; i < sequence.length; i++) {
+    p.then(res => {
+      promises[res] = handler(sequence[i]).then(() => res)
+      return Promise.race(promises)
+    })
+  }
+
 }
