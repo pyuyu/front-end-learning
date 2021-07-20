@@ -1,24 +1,27 @@
 
 let arr = [9, 13, 25, 16, 7, 92, 28]
-// console.log(bubbleSort(arr))
+console.log(bubbleSort(arr))
 // console.log(selectionSort(arr))
 // console.log(insertSort(arr))
 // console.log(shellSort(arr))
 // console.log(mergeSort_main(arr))
-console.log(quickSort_main(arr))
+// console.log(quickSort_main(arr))
 // console.log(heapSort_main(arr))
 
 
 // 冒泡排序
 function bubbleSort(arr) {
+    let swapped = false
     for (let i = 0; i < arr.length - 1; i++) {
         for (let j = 0; j < arr.length - 1 - i; j++) {
             if (arr[j] > arr[j + 1]) {
                 const temp = arr[j + 1]
                 arr[j + 1] = arr[j]
                 arr[j] = temp
+                swapped = true
             }
         }
+        if(!swapped) break
     }
     return arr
 }
