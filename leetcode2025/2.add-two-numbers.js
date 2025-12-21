@@ -24,20 +24,26 @@
  */
 var addTwoNumbers = function (l1, l2) {
     let sum = new ListNode(0);
-    const head = sum;
-    let addOne = 0;
-    while (l1 || l2 || addOne) {
-        const val1 = l1 ? l1.val : 0;
-        const val2 = l2 ? l2.val : 0;
-        const res = val1 + val2 + addOne;
-        sum.next = new ListNode(res % 10);
-        addOne = res >= 10 ? 1 : 0;
-        sum = sum.next;
-        if (l1) l1 = l1.next;
-        if (l2) l2 = l2.next;
+    let sumNode = sum;
+    let hasCarry = 0;
+    while(l1 || l2 || hasCarry) {
+        const value1 = l1 ? l1.val : 0;
+        const value2 = l2 ? l2.val : 0;
+        const res = value1 + value2 + hasCarry;
+        const num = res % 10;
+        sum.next = new ListNode(num);
+        hasCarry = res >= 10 ? 1: 0;
+        sum = sum.next
+        if(l1) l1 = l1.next;
+        if(l2) l2 = l2.next;
     }
-    return head.next;
+    return sumNode.next;
 };
+
+function ListNode(val, next) {
+    this.val = (val === undefined ? 0 : val)
+    this.next = (next === undefined ? null : next)
+}
 // @lc code=end
 
 
