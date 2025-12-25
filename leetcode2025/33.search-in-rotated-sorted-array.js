@@ -2,7 +2,7 @@
  * @lc app=leetcode.cn id=33 lang=javascript
  * @lcpr version=30204
  *
- * [33] 搜索旋转排序数组
+ * [33] 搜索旋转排序数组 
  *
  * https://leetcode.cn/problems/search-in-rotated-sorted-array/description/
  *
