@@ -51,8 +51,9 @@
  * @param {string} s
  * @return {string}
  */
-var longestPalindrome = function(s) {
-    if(!s || s.length === 0) return '';
+// https://leetcode.cn/problems/longest-palindromic-substring/solutions/63641/zhong-xin-kuo-san-fa-he-dong-tai-gui-hua-by-reedfa/
+var longestPalindrome1 = function (s) {
+    if (!s || s.length === 0) return '';
     const sLen = s.length;
     let start = 0;
     let left = 0;
@@ -63,17 +64,17 @@ var longestPalindrome = function(s) {
         left = i - 1;
         right = i + 1;
         len = 1;
-        while(left >= 0 && s[left] === s[i]) {
-            left --;
-            len ++;
+        while (left >= 0 && s[left] === s[i]) {
+            left--;
+            len++;
         }
-        while(right <= sLen - 1 && s[right] === s[i]) {
-            right ++;
-            len ++;
+        while (right <= sLen - 1 && s[right] === s[i]) {
+            right++;
+            len++;
         }
-        while(left >= 0 && right <= sLen - 1 && s[left] === s[right]) {
-            left --;
-            right ++;
+        while (left >= 0 && right <= sLen - 1 && s[left] === s[right]) {
+            left--;
+            right++;
             len = len + 2;
         }
         if (len > maxLen) {
@@ -83,6 +84,29 @@ var longestPalindrome = function(s) {
     }
     return s.slice(start + 1, start + maxLen + 1)
 };
+
+var longestPalindrome = function (s) {
+    if (!s || s.length === 0) return '';
+    let maxLen = 1;
+    let begin = 0;
+    const dp = Array.from({ length: s.length }, () => []);
+    for (let right = 1; right < s.length; right++) {
+        for (let left = 0; left < right; left++) {
+            if (s[left] !== s[right]) {
+                dp[left][right] = false;
+            } else if (right - left < 3 || dp[left + 1][right - 1]) {
+                dp[left][right] = true;
+            } else {
+                dp[left][right] = false;
+            }
+            if (dp[left][right] && right - left + 1 > maxLen) {
+                maxLen = right - left + 1;
+                begin = left;
+            }
+        }
+    }
+    return s.slice(begin, maxLen + begin);
+}
 // @lc code=end
 
 
