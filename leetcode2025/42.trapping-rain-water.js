@@ -58,8 +58,8 @@ var trap = function(height) {
     let res = 0;
     let l = 0;
     let r = height.length - 1;
-    const lmax = height[l];
-    const rmax = height[r]
+    let lmax = height[l];
+    let rmax = height[r]
     while(l < r) {
         lmax = Math.max(lmax, height[l]);
         rmax = Math.max(rmax, height[r]);
