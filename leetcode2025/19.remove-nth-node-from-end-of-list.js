@@ -71,6 +71,11 @@
  * @return {ListNode}
  */
 
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
+
 // 方法1： 先遍历一遍数组， 得到数组长度len， 然后删除第len - n + 1 个元素
 // 方法2： 利用栈， 先把所有节点入栈， 然后出栈n个元素
 // 方法3： 双指针法 https://leetcode.cn/problems/remove-nth-node-from-end-of-list/solutions/2004057/ru-he-shan-chu-jie-dian-liu-fen-zhong-ga-xpfs/
@@ -107,3 +112,7 @@ var removeNthFromEnd = function(head, n) {
 
  */
 
+
+// @after-stub-for-debug-begin
+module.exports = removeNthFromEnd;
+// @after-stub-for-debug-end
